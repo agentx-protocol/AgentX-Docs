@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-02-19T10:00:00.000Z" agent="AgentX-Docs" version="24.5.1">
+  <diagram name="AgentX Architecture" id="agentx-arch-v1">
+    <mxGraphModel dx="1422" dy="762" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1654" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- Title -->
+        <mxCell id="title" value="AgentX Protocol — System Architecture" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=20;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="20" width="600" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- OFF-CHAIN container -->
+        <mxCell id="offchain-container" value="Off-Chain Layer" style="swimlane;startSize=30;fillColor=#dae8fc;strokeColor=#6c8ebf;fontStyle=1;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="80" y="100" width="580" height="500" as="geometry" />
+        </mxCell>
+
+        <!-- Agent box -->
+        <mxCell id="agent-box" value="AgentX Agent&#xa;(Python SDK)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=13;fontStyle=1;" vertex="1" parent="offchain-container">
+          <mxGeometry x="60" y="80" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- ReAct loop -->
+        <mxCell id="react-box" value="ReAct Loop&#xa;Reason → Act → Observe" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;" vertex="1" parent="offchain-container">
+          <mxGeometry x="60" y="200" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- LLM backend -->
+        <mxCell id="llm-box" value="LLM Backend&#xa;(OpenAI / Anthropic&#xa;/ Ollama)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;" vertex="1" parent="offchain-container">
+          <mxGeometry x="60" y="310" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Tools -->
+        <mxCell id="tools-box" value="Agent Tools&#xa;(Python functions)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=11;" vertex="1" parent="offchain-container">
+          <mxGeometry x="310" y="80" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Oracle -->
+        <mxCell id="oracle-box" value="Oracle Node&#xa;(Ed25519 signer)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#ffffff;fontSize=11;fontStyle=1;" vertex="1" parent="offchain-container">
+          <mxGeometry x="310" y="310" width="200" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- Message bus -->
+        <mxCell id="msgbus-box" value="P2P Message Bus&#xa;(libp2p gossip)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#647687;strokeColor=#314354;fontColor=#ffffff;fontSize=11;" vertex="1" parent="offchain-container">
+          <mxGeometry x="185" y="420" width="200" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ON-CHAIN container -->
+        <mxCell id="onchain-container" value="On-Chain Layer (Solana)" style="swimlane;startSize=30;fillColor=#9945FF;strokeColor=#7B35D9;fontStyle=1;fontSize=14;fontColor=#ffffff;" vertex="1" parent="1">
+          <mxGeometry x="780" y="100" width="500" height="500" as="geometry" />
+        </mxCell>
+
+        <!-- AgentX program -->
+        <mxCell id="program-box" value="AgentX Program&#xa;(Anchor / Rust)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9945FF;fontSize=13;fontStyle=1;strokeWidth=3;" vertex="1" parent="onchain-container">
+          <mxGeometry x="130" y="60" width="220" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- AgentAccount PDA -->
+        <mxCell id="agent-pda" value="AgentAccount (PDA)&#xa;owner | agent_id | status&#xa;tasks_done | rewards" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=10;" vertex="1" parent="onchain-container">
+          <mxGeometry x="40" y="190" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- TaskAccount PDA -->
+        <mxCell id="task-pda" value="TaskAccount (PDA)&#xa;result_hash | summary&#xa;reward | verified" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=10;" vertex="1" parent="onchain-container">
+          <mxGeometry x="260" y="190" width="180" height="80" as="geometry" />
+        </mxCell>
+
+        <!-- RegistryAccount -->
+        <mxCell id="registry-pda" value="RegistryAccount (PDA)&#xa;authority | total_agents&#xa;agx_mint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="onchain-container">
+          <mxGeometry x="40" y="320" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- RewardVault -->
+        <mxCell id="reward-vault" value="RewardVault&#xa;($AGX SPL tokens)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f0a30a;strokeColor=#BD7000;fontColor=#ffffff;fontSize=10;fontStyle=1;" vertex="1" parent="onchain-container">
+          <mxGeometry x="260" y="320" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- AGX Token mint -->
+        <mxCell id="agx-mint" value="$AGX Token Mint&#xa;(Solana SPL)&#xa;1B total supply" style="ellipse;whiteSpace=wrap;html=1;fillColor=#9945FF;strokeColor=#7B35D9;fontColor=#ffffff;fontSize=10;fontStyle=1;" vertex="1" parent="onchain-container">
+          <mxGeometry x="155" y="415" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- ARWEAVE / IPFS -->
+        <mxCell id="storage-box" value="Arweave / IPFS&#xa;(Full task results)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#647687;strokeColor=#314354;fontColor=#ffffff;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1350" y="320" width="180" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- USER / DEV -->
+        <mxCell id="user-box" value="Developer / User&#xa;(AgentX Python SDK)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=11;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="100" y="680" width="200" height="70" as="geometry" />
+        </mxCell>
+
+        <!-- Edges -->
+        <!-- Agent → ReAct -->
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="agent-box" target="react-box" parent="offchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ReAct → LLM -->
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="react-box" target="llm-box" parent="offchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Agent → Tools -->
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="agent-box" target="tools-box" parent="offchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Agent → Oracle -->
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="agent-box" target="oracle-box" parent="offchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Agent → P2P -->
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="agent-box" target="msgbus-box" parent="offchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Oracle → Program (cross-container) -->
+        <mxCell id="e6" value="execute_task()" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#f0a30a;fontStyle=2;" edge="1" source="oracle-box" target="program-box" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- SDK → Program -->
+        <mxCell id="e7" value="register_agent()&#xa;update_state()&#xa;claim_reward()" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#6c8ebf;fontStyle=2;fontSize=9;" edge="1" source="agent-box" target="program-box" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Program → PDAs -->
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="program-box" target="agent-pda" parent="onchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="program-box" target="task-pda" parent="onchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e10" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="program-box" target="registry-pda" parent="onchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e11" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="program-box" target="reward-vault" parent="onchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e12" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="reward-vault" target="agx-mint" parent="onchain-container">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Oracle → Arweave -->
+        <mxCell id="e13" value="store result" style="edgeStyle=orthogonalEdgeStyle;dashed=1;strokeColor=#647687;" edge="1" source="oracle-box" target="storage-box" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- User → Agent -->
+        <mxCell id="e14" value="agent.run(task)" style="edgeStyle=orthogonalEdgeStyle;" edge="1" source="user-box" target="agent-box" parent="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
